@@ -18,26 +18,26 @@ let Run() =
             | '0' -> zeros <- zeros + 1
             | '1' -> ones <- ones + 1
             | _ -> Console.WriteLine("Error!!")
-        if (zeros < ones) then
-            true
-        else 
-            false;
+        zeros >= ones;
 
     for i in 0 .. instructions[0].Length-1 do
         let mostCommon = getMostCommon(i)
         gammaRate <- gammaRate + System.Convert.ToInt32(mostCommon).ToString()
         epsilonRate <- epsilonRate + System.Convert.ToInt32(not mostCommon).ToString()
        
-    let gammaRateInt = 
-        gammaRate 
-        |> Seq.map int
-        |> Seq.toArray;
+    let mutable gammaRateInt = 0;
+    let mutable epsilonRateInt = 0;
+    let gammaRateReversed = gammaRate |> Array.ofSeq |> Array.rev
 
-    for i in 0 .. gammaRate.Length-1
-        
-    
+    for i in 0 .. gammaRateReversed.Length-1 do
+        match gammaRateReversed[i] with 
+        | '0' -> epsilonRateInt <- epsilonRateInt + pown 2 i
+        | '1' -> gammaRateInt <- gammaRateInt + pown 2 i
+        | _ -> Console.WriteLine("Error!!")
+
+    let multiplied = gammaRateInt * epsilonRateInt
     printfn "part 1"
-    printfn "%A" gammaRate
+    printfn "%A" multiplied
 
     
 
